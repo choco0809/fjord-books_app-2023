@@ -9,7 +9,7 @@
     <strong> この日報は以下の日報からリンクされています </strong>
     <% @report.mentioned_reports.uniq.each do |report| %>
       <p>
-        ・<%= link_to report.title, report  %>
+        ・<%= link_to report.title, report %>
       </p>
     <% end %>
   </div>

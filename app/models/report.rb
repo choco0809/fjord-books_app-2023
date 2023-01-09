@@ -22,7 +22,6 @@ class Report < ApplicationRecord
 
   has_many :mentioned_reports, through: :mentioned, source: :mentioning_report
 
-
   validates :title, presence: true
   validates :content, presence: true
 
