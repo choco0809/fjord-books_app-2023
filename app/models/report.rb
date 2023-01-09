@@ -34,10 +34,15 @@ class Report < ApplicationRecord
     created_at.to_date
   end
 
-  def save_mentioning_report
+  def save_mentioning_reports
     content.scan(REPORT_LINK).each do |report_id|
       report = Report.find(report_id)
-      mentioning.create(mentioned_report: report[0])
+      mentioning_reports << report
     end
+  end
+
+  def update_mentioning_reports
+    mentioning.each(&:destroy)
+    save_mentioning_reports
   end
 end
