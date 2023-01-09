@@ -1,24 +1,26 @@
 # frozen_string_literal: true
 
 class Report < ApplicationRecord
+  REPORT_LINK = %r{http://localhost:3000/reports/([1-9]\d*)}
+
   belongs_to :user
   has_many :comments, as: :commentable, dependent: :destroy
 
   has_many :mentioning,
            class_name: 'MentioningMentionedReport',
-           foreign_key: 'mentioned_report_id',
-           inverse_of: :mentioned_reports,
+           foreign_key: 'mentioning_report_id',
+           inverse_of: :mentioning_report,
            dependent: :destroy
-  # 引用先の日報を求める場合
-  has_many :mentioning_reports, through: :mentioning, source: :mentioning_reports
+
+  has_many :mentioning_reports, through: :mentioning, source: :mentioned_report
 
   has_many :mentioned,
            class_name: 'MentioningMentionedReport',
-           foreign_key: 'mentioning_report_id',
-           inverse_of: :mentioning_reports,
+           foreign_key: 'mentioned_report_id',
+           inverse_of: :mentioned_report,
            dependent: :destroy
 
-  has_many :mentioned_reports, through: :mentioned, source: :mentioned_reports
+  has_many :mentioned_reports, through: :mentioned, source: :mentioning_report
 
 
   validates :title, presence: true
@@ -30,5 +32,12 @@ class Report < ApplicationRecord
 
   def created_on
     created_at.to_date
+  end
+
+  def save_mentioning_report
+    content.scan(REPORT_LINK).each do |report_id|
+      report = Report.find(report_id)
+      mentioning.create(mentioned_report: report[0])
+    end
   end
 end
