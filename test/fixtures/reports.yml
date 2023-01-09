@@ -9,3 +9,15 @@ two:
   user: two
   title: MyString
   content: MyText
+
+three:
+  id: 3
+  user: one
+  title: MyString
+  content: "http://localhost:3000/reports/4"
+
+four:
+  id: 4
+  user: two
+  title: MyString
+  content: MyText
