@@ -38,5 +38,4 @@ class ReportTest < ActiveSupport::TestCase
       @report3.update_mentioning_reports
     end
   end
-
 end
