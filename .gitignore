@@ -37,3 +37,5 @@
 /public/uploads
 
 .env
+yarn.lock
+node_modules/.yarn-integrity
