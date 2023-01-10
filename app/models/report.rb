@@ -34,7 +34,7 @@ class Report < ApplicationRecord
   end
 
   def save_mentioning_reports
-    content.scan(REPORT_LINK).each do |report_id|
+    content.scan(REPORT_LINK).uniq.each do |report_id|
       report = Report.find(report_id)
       mentioning_reports << report
     end
