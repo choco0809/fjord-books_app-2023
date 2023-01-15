@@ -47,7 +47,7 @@ class Report < ApplicationRecord
       success = save
       raise ActiveRecord::Transactions unless success
 
-      mentioning.each(&:destroy)
+      active_mention.each(&:destroy)
       save_mentioning_reports
     end
     success
