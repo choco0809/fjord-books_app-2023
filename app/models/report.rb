@@ -40,8 +40,16 @@ class Report < ApplicationRecord
     end
   end
 
-  def update_mentioning_reports
-    mentioning.each(&:destroy)
-    save_mentioning_reports
+  def save_or_update_report_and_update_mentioning_reports(report_params = nil)
+    success = true
+    transaction(joinable: false, requires_new: true) do
+      assign_attributes(report_params) if report_params
+      success = save
+      raise ActiveRecord::Transactions unless success
+
+      mentioning.each(&:destroy)
+      save_mentioning_reports
+    end
+    success
   end
 end
