@@ -1,23 +1,11 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  user: one
-  title: MyString
-  content: MyText
+report1:
+  user: bob
+  title: railsを勉強する時に参考するサイト
+  content: Railsガイドを参考にするとよい
 
-two:
-  user: two
-  title: MyString
-  content: MyText
-
-three:
-  id: 3
-  user: one
-  title: MyString
-  content: "http://localhost:3000/reports/4"
-
-four:
-  id: 4
-  user: two
-  title: MyString
-  content: MyText
+report2:
+  user: bob
+  title: rubyの仕様も理解していたほうがよい
+  content: Rubyの公式リファレンスを読むとよい
