@@ -44,5 +44,4 @@ class ReportTest < ActiveSupport::TestCase
       @new_report.save_or_update_report_and_update_mentioning_reports(content: @another_report_url)
     end
   end
-
 end
