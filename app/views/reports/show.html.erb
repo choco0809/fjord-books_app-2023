@@ -7,7 +7,7 @@
 <% if @report.mentioned_reports.count != 0 %>
   <div>
     <strong> この日報は以下の日報からリンクされています </strong>
-    <% @report.mentioned_reports.each do |report| %>
+    <% @report.mentioned_reports.order(:id).each do |report| %>
       <ul>
         <li>
           <%= link_to report.title, report %>
