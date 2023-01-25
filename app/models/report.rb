@@ -35,7 +35,7 @@ class Report < ApplicationRecord
 
   def save_or_update_report_and_update_mentioning_reports(report_params = nil)
     success = true
-    transaction(joinable: false, requires_new: true) do
+    transaction do
       assign_attributes(report_params) if report_params
       success = save
       raise ActiveRecord::Transactions unless success
