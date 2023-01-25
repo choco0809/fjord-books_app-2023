@@ -33,13 +33,6 @@ class Report < ApplicationRecord
     created_at.to_date
   end
 
-  def save_mentioning_reports
-    content.scan(REPORT_LINK).uniq.each do |report_id|
-      report = Report.find_by(id: report_id)
-      mentioning_reports << report if report
-    end
-  end
-
   def save_or_update_report_and_update_mentioning_reports(report_params = nil)
     success = true
     transaction(joinable: false, requires_new: true) do
@@ -52,4 +45,14 @@ class Report < ApplicationRecord
     end
     success
   end
+
+  private
+
+  def save_mentioning_reports
+    content.scan(REPORT_LINK).uniq.each do |report_id|
+      report = Report.find_by(id: report_id)
+      mentioning_reports << report if report
+    end
+  end
+
 end
