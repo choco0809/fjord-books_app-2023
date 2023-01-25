@@ -38,7 +38,7 @@ class Report < ApplicationRecord
     transaction do
       assign_attributes(report_params) if report_params
       success = save
-      raise ActiveRecord::Transactions unless success
+      raise ActiveRecord::Rollback unless success
 
       active_mention.each(&:destroy)
       save_mentioning_reports
