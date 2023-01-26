@@ -33,10 +33,9 @@ class Report < ApplicationRecord
     created_at.to_date
   end
 
-  def save_or_update_report_and_update_mentioning_reports(report_params = nil)
+  def save_report_and_mentioning_reports
     success = true
     transaction do
-      assign_attributes(report_params) if report_params
       success = save
       raise ActiveRecord::Rollback unless success
 
