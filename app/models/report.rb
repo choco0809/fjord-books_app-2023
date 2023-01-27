@@ -48,10 +48,8 @@ class Report < ApplicationRecord
   private
 
   def save_mentioning_reports
-    content.scan(REPORT_LINK).uniq.each do |report_id|
-      Report.where(id: report_id).find_each do |report|
-        mentioning_reports << report
-      end
+    Report.where(id: content.scan(REPORT_LINK).uniq.flatten).find_each do |report|
+      mentioning_reports << report
     end
   end
 end
